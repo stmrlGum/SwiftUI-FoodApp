@@ -11,7 +11,7 @@ import SwiftUI
 struct FodeiApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ScreenFactory.makeOnBoarding()
         }
     }
 }
