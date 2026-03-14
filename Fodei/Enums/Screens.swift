@@ -6,5 +6,6 @@
 //
 
 enum Screens: Hashable {
-    case registration
+    case welcome
+    // case registration
 }

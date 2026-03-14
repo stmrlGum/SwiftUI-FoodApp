@@ -11,4 +11,9 @@ struct ScreenFactory {
         let vm = OnBoardingViewModel()
         return OnBoardingView(viewModel: vm)
     }
+    
+    static func makeWelcome() -> WelcomeView {
+        let vm = WelcomeViewModel()
+        return WelcomeView(viewModel: vm)
+    }
 }

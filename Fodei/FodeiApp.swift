@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct FodeiApp: App {
+    @AppStorage("isShowOnBoarding") var isShowOnBoarding: Bool = false
     var body: some Scene {
         WindowGroup {
-            ScreenFactory.makeOnBoarding()
+            if isShowOnBoarding {
+                ScreenFactory.makeWelcome()
+            } else {
+                ScreenFactory.makeOnBoarding()
+            }
         }
     }
 }
