@@ -31,6 +31,7 @@ struct GeneralButton: View {
         }
         .background(backgroundColor)
         .cornerRadius(8)
+        .disabled(style == .inActive ? true : false)
     }
 }
 
