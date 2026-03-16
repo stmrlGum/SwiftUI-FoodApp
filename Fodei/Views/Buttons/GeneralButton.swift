@@ -31,8 +31,6 @@ struct GeneralButton: View {
         }
         .background(backgroundColor)
         .cornerRadius(8)
-        
-        
     }
 }
 
