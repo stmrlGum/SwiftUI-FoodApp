@@ -10,7 +10,6 @@ import SwiftUI
 struct WelcomeView: View {
     
     @StateObject var viewModel: WelcomeViewModel
-    @State private var showScreen = false
     
     var body: some View {
         VStack {
@@ -31,12 +30,16 @@ struct WelcomeView: View {
                     var transaction = Transaction()
                     transaction.disablesAnimations = true
                     withTransaction(transaction) {
-                        showScreen = true
+                        viewModel.openRegistration(tab: 0)
                     }
                     
                 }
                 GeneralButton(text: "Login", style: .lightGreenState) {
-                    //
+                    var transaction = Transaction()
+                    transaction.disablesAnimations = true
+                    withTransaction(transaction) {
+                        viewModel.openRegistration(tab: 1)
+                    }
                 }
             }
             .padding(.horizontal, 60)
@@ -49,8 +52,8 @@ struct WelcomeView: View {
             .padding(.horizontal, 15)
         }
         .navigationBarBackButtonHidden()
-        .fullScreenCover(isPresented: $showScreen) {
-            RegistrationView()
+        .fullScreenCover(isPresented: $viewModel.showScreen) {
+            ScreenFactory.makeRegistration(selected: viewModel.selectedTab)
                 .presentationBackground(.clear)
         }
     }
