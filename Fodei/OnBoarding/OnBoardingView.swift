@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OnBoardingView: View {
     
-    @StateObject private var viewModel: OnBoardingViewModel
+    @StateObject var viewModel: OnBoardingViewModel
     
     var body: some View {
         NavigationStack(path: $viewModel.path) {
@@ -40,13 +40,12 @@ struct OnBoardingView: View {
                 }
                 .padding(.horizontal, 27)
             }
-//            .navigationDestination(for: Screens.self) { screen in
-//                switch screen {
-//                case .registration:
-//                    //
-//                    print("open registration")
-//                }
-//            }
+            .navigationDestination(for: Screens.self) { screen in
+                switch screen {
+                case .welcome:
+                    ScreenFactory.makeWelcome()
+                }
+            }
         }
     }
 }

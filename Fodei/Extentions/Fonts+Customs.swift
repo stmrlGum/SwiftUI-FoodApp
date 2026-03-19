@@ -15,6 +15,10 @@ extension Font {
     static func interSemiBold(size: CGFloat) -> Font {
         return Font.custom("Inter-SemiBold", size: size)
     }
+    
+    static func interBold(size: CGFloat) -> Font {
+        return Font.custom("Inter-Bold", size: size)
+    }
 
     
 }
