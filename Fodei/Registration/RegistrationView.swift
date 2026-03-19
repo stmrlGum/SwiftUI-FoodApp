@@ -34,7 +34,8 @@ struct RegistrationView: View {
             registrationSheet
                 .frame(height: 576)
         }
-        .ignoresSafeArea()
+        .ignoresSafeArea(.container)
+        
     }
     
     private var registrationSheet: some View {
