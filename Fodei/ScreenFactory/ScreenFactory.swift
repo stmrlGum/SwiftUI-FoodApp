@@ -5,20 +5,33 @@
 //  Created by Danil on 13.03.2026.
 //
 
+import SwiftUI
 
 struct ScreenFactory {
-    static func makeOnBoarding() -> OnBoardingView {
+    static func makeOnBoarding(path: Binding<NavigationPath>) -> OnBoardingView {
         let vm = OnBoardingViewModel()
-        return OnBoardingView(viewModel: vm)
+        return OnBoardingView(path: path, viewModel: vm)
     }
     
-    static func makeWelcome() -> WelcomeView {
+    static func makeWelcome(path: Binding<NavigationPath>) -> WelcomeView {
         let vm = WelcomeViewModel()
-        return WelcomeView(viewModel: vm)
+        return WelcomeView(path: path, viewModel: vm)
     }
     
-    static func makeRegistration(selected: Int) -> RegistrationView {
+    static func makeRegistration(selected: Int, onDismiss: @escaping () -> Void) -> RegistrationView {
         let vm = RegistrationViewModel(selected: selected)
-        return RegistrationView(viewModel: vm)
+        return RegistrationView(
+            viewModel: vm,
+            onDismiss: onDismiss
+        )
+    }
+    
+    static func makeForgetPassword() -> ForgetPasswordView {
+        let vm = ForgetPasswordViewModel()
+        return ForgetPasswordView(viewModel: vm)
+    }
+    
+    static func makeMain() -> MainView {
+        return MainView()
     }
 }

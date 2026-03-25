@@ -23,6 +23,8 @@ final class RegistrationViewModel: ObservableObject {
     
     @Published var selected: Int
     @Published var showSheet: Bool = false
+    @Published var isForgotPresented: Bool = false
+    var onMain: (() -> Void)?
     
     init(selected: Int) {
         self.selected = selected
@@ -41,14 +43,17 @@ final class RegistrationViewModel: ObservableObject {
     
     func register() {
         print("register:", createAccountModel.fullName, createAccountModel.username, createAccountModel.password)
+        onMain?()
     }
     
     func login() {
         print("login:", loginModel.username, loginModel.password)
+        onMain?()
     }
     
     func forgotPassword() {
         print("forgot password")
+        isForgotPresented = true
     }
     
     func selectTab(_ index: Int) {

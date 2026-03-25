@@ -9,48 +9,48 @@ import SwiftUI
 
 struct OnBoardingView: View {
     
+    @Binding var path: NavigationPath
     @StateObject var viewModel: OnBoardingViewModel
     
     var body: some View {
-        NavigationStack(path: $viewModel.path) {
-            VStack(spacing: 0) {
-                TabView(selection: $viewModel.page) {
-                    ForEach(Array(viewModel.items.enumerated()), id: \.element.id) { index, item in
-                        OnBoardingItem(item: item)
-                            .tag(index)
-                    }
+        VStack(spacing: 0) {
+            TabView(selection: $viewModel.page) {
+                ForEach(Array(viewModel.items.enumerated()), id: \.element.id) { index, item in
+                    OnBoardingItem(item: item)
+                        .tag(index)
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                HStack {
-                    ClearButtonView(text: "Skip") {
-                        viewModel.skip()
-                    }
-                    Spacer()
-                    PageCounterView(
-                        page: $viewModel.page,
-                        totalPage: viewModel.items.count
-                    )
-                    Spacer()
-                    Button {
-                        viewModel.nextPage()
-                    } label: {
-                        Image("arrowButton")
-                            .frame(height: 24)
-                    }
-                }
-                .padding(.horizontal, 27)
             }
-            .navigationDestination(for: Screens.self) { screen in
-                switch screen {
-                case .welcome:
-                    ScreenFactory.makeWelcome()
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            HStack {
+                ClearButtonView(text: "Skip") {
+                    viewModel.skip()
                 }
+                Spacer()
+                PageCounterView(
+                    page: $viewModel.page,
+                    totalPage: viewModel.items.count
+                )
+                Spacer()
+                Button {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        viewModel.nextPage()
+                    }
+                } label: {
+                    Image("arrowButton")
+                        .frame(height: 24)
+                }
+            }
+            .padding(.horizontal, 27)
+        }
+        .onAppear {
+            viewModel.onNext = {
+                path.append(OnBoardingRoute.welcome)
             }
         }
     }
 }
 
 #Preview {
-    ScreenFactory.makeOnBoarding()
+    ScreenFactory.makeOnBoarding(path: .constant(NavigationPath()))
     
 }

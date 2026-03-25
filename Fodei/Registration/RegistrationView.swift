@@ -13,6 +13,7 @@ struct RegistrationView: View {
     @Environment(\.dismiss) private var dismiss
     @Namespace private var animationNamespace
     
+    var onDismiss: () -> Void
     var body: some View {
         ZStack(alignment: .bottom) {
             Color.black.opacity(0.45)
@@ -23,6 +24,9 @@ struct RegistrationView: View {
                 .frame(height: 576)
         }
         .ignoresSafeArea(.container)
+        .fullScreenCover(isPresented: $viewModel.isForgotPresented) {
+            ScreenFactory.makeForgetPassword()
+        }
     }
 }
 
@@ -114,6 +118,7 @@ private extension RegistrationView {
                     style: viewModel.isCreateAccountValid ? .greenState : .inActive
                 ) {
                     viewModel.register()
+                    dismissAndShowMain()
                 }
                 Divider()
                     .padding(.horizontal, 60)
@@ -158,7 +163,8 @@ private extension RegistrationView {
                     text: "Login",
                     style: viewModel.isLoginValid ? .greenState : .inActive
                 ) {
-                    viewModel.login()
+                    viewModel.login() // completion
+                    dismissAndShowMain()
                 }
                 Divider()
                     .padding(.horizontal, 60)
@@ -173,7 +179,7 @@ private extension RegistrationView {
 }
 
 private extension RegistrationView {
-    func closeSheet() {
+    private func closeSheet(completion: (() -> Void)? = nil) {
         withAnimation(.easeIn(duration: 0.3)) {
             viewModel.closeSheet {
                 var transaction = Transaction()
@@ -183,9 +189,18 @@ private extension RegistrationView {
                 }
             }
         }
+        completion?()
+    }
+    
+    private func dismissAndShowMain() {
+        closeSheet {
+            onDismiss()
+        }
     }
 }
 
-//#Preview {
-//    RegistrationView()
-//}
+#Preview {
+    ScreenFactory.makeRegistration(selected: 0) {
+        print("dismissed")
+    }
+}

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     
+    @Binding var path: NavigationPath
     @StateObject var viewModel: WelcomeViewModel
     
     var body: some View {
@@ -53,12 +54,14 @@ struct WelcomeView: View {
         }
         .navigationBarBackButtonHidden()
         .fullScreenCover(isPresented: $viewModel.showScreen) {
-            ScreenFactory.makeRegistration(selected: viewModel.selectedTab)
-                .presentationBackground(.clear)
+            ScreenFactory.makeRegistration(selected: viewModel.selectedTab) {
+                path.append(OnBoardingRoute.main)
+            }
+            .presentationBackground(.clear)
         }
     }
 }
 
 #Preview {
-    ScreenFactory.makeWelcome()
+    ScreenFactory.makeWelcome(path: .constant(NavigationPath()))
 }
