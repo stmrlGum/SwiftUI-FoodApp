@@ -12,7 +12,7 @@ final class WelcomeViewModel: ObservableObject {
     @Published var showScreen: Bool = false
     
     func openRegistration(tab: Int) {
-            selectedTab = tab
-            showScreen = true
-        }
+        selectedTab = tab
+        showScreen = true
+    }
 }

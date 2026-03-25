@@ -10,12 +10,26 @@ import SwiftUI
 @main
 struct FodeiApp: App {
     @AppStorage("isShowOnBoarding") var isShowOnBoarding: Bool = false
+    @State private var path = NavigationPath()
+    
     var body: some Scene {
         WindowGroup {
-            if isShowOnBoarding {
-                ScreenFactory.makeWelcome()
-            } else {
-                ScreenFactory.makeOnBoarding()
+            NavigationStack(path: $path) {
+                Group {
+                    if isShowOnBoarding {
+                        ScreenFactory.makeMain()
+                    } else {
+                        ScreenFactory.makeOnBoarding(path: $path)
+                    }
+                }
+                .navigationDestination(for: OnBoardingRoute.self) { route in
+                    switch route {
+                    case .welcome:
+                        ScreenFactory.makeWelcome(path: $path)
+                    case .main:
+                        ScreenFactory.makeMain()
+                    }
+                }
             }
         }
     }

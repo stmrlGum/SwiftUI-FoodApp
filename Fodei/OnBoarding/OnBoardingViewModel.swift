@@ -11,8 +11,7 @@ import Combine
 final class OnBoardingViewModel: ObservableObject {
     
     @Published var page: Int = 0
-    @Published var path = NavigationPath()
-    @AppStorage("isShowOnBoarding") var isShowOnBoarding: Bool = false
+    var onNext: (() -> Void)?
     
     let items: [OnBoardingModel] = [
         OnBoardingModel(
@@ -53,6 +52,6 @@ final class OnBoardingViewModel: ObservableObject {
     
     private func finishOnboarding() {
         print("next view")
-        path.append(Screens.welcome)
+        onNext?()
     }
 }
