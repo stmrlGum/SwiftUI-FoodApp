@@ -12,8 +12,8 @@ struct RegistrationView: View {
     @StateObject var viewModel: RegistrationViewModel
     @Environment(\.dismiss) private var dismiss
     @Namespace private var animationNamespace
-    
     var onDismiss: () -> Void
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             Color.black.opacity(0.45)
@@ -33,7 +33,7 @@ struct RegistrationView: View {
 private extension RegistrationView {
     
     var registrationSheet: some View {
-        VStack {
+        VStack(spacing: 0) {
             GrabberView()
                 .padding(.top, 24)
                 .frame(width: 48)

@@ -13,7 +13,7 @@ struct WelcomeView: View {
     @StateObject var viewModel: WelcomeViewModel
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Image("orderSuccess")
             VStack(spacing: 8) {
                 Text("Welcome")

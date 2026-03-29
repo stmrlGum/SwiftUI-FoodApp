@@ -34,4 +34,9 @@ struct ScreenFactory {
     static func makeMain() -> MainView {
         return MainView()
     }
+    
+    static func makeHomeView() -> HomeView {
+        let vm = HomeViewModel()
+        return HomeView(viewModel: vm)
+    }
 }

@@ -21,7 +21,7 @@ struct OnBoardingView: View {
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            HStack {
+            HStack(spacing: 0) {
                 ClearButtonView(text: "Skip") {
                     viewModel.skip()
                 }
