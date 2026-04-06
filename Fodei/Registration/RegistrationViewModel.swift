@@ -22,7 +22,7 @@ final class RegistrationViewModel: ObservableObject {
     )
     
     @Published var selected: Int
-    @Published var showSheet: Bool = false
+    @Published var showSheet: Bool = true
     @Published var isForgotPresented: Bool = false
     var onMain: (() -> Void)?
     

@@ -16,6 +16,7 @@ enum GeneralButtonState {
 struct GeneralButton: View {
     var text: String
     var style: GeneralButtonState
+    var height: CGFloat = 49
     var onPress: (() -> ())?
     var body: some View {
         Button {
@@ -26,7 +27,7 @@ struct GeneralButton: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 8)
                 .foregroundColor(textColor)
-                .frame(height: 49)
+                .frame(height: height)
             
         }
         .background(backgroundColor)
