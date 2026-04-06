@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var viewModel: HomeViewModel
+    @State var viewModel: HomeViewModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -35,10 +35,11 @@ struct HomeView: View {
                         .padding(.top, 36)
                     bookingItems
                         .padding(.top, 16)
+                        .padding(.bottom, 26)
                 }
             }
         }
-        .background(Color(#colorLiteral(red: 0.9719485641, green: 0.9719484448, blue: 0.9719485641, alpha: 1)).ignoresSafeArea())
+        .background(Color(#colorLiteral(red: 0.9719485641, green: 0.9719484448, blue: 0.9719485641, alpha: 1)))
     }
 }
 

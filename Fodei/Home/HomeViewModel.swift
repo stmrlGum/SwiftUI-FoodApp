@@ -8,10 +8,11 @@
 import Foundation
 import Combine
 
-final class HomeViewModel: ObservableObject {
+@Observable final class HomeViewModel {
     
-    @Published var searchText = ""
-    @Published var currentPage: Int? = 0
+    var searchText = ""
+    var currentPage: Int? = 0
+    let id = UUID()
     
     let topСarouselItems: [TopСarousel] = [
         TopСarousel(image: "burgers",

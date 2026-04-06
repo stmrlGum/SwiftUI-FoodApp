@@ -14,7 +14,7 @@ struct SuccessPasswordView: View {
     var body: some View {
         VStack {
             Spacer()
-            Image("successIcon")
+            Image("SuccessIcon")
                 .shadow(color:Color(#colorLiteral(red: 0.2947646379, green: 0.7963799834, blue: 1, alpha: 1)).opacity(0.24), radius: 30, x: 0, y: 10)
             Text("Success")
                 .foregroundStyle(Color(#colorLiteral(red: 0.2156862745, green: 0.2549019608, blue: 0.3176470588, alpha: 1)))

@@ -9,26 +9,26 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedTab: TabBarEnums = .home
+    
+    init() {
+        UITabBar.appearance().isHidden = true
+    }
+    
     var body: some View {
-        ZStack {
-            Color.white
-                    .ignoresSafeArea()
-            switch selectedTab {
-            case .home:
-                Color.blue
-            case .booking:
+        VStack(spacing: -10) {
+            TabView(selection: $selectedTab) {
+                ScreenFactory.makeHomeView()
+                    .tag(TabBarEnums.home)
                 Color.green
-            case .profile:
+                    .tag(TabBarEnums.booking)
                 Color.cyan
+                    .tag(TabBarEnums.profile)
             }
-            VStack {
-                Spacer()
-                TabBarView(selectedTab: $selectedTab)
-            }
+            TabBarView(selectedTab: $selectedTab)
         }
-        .ignoresSafeArea(edges: .top)
     }
 }
+
 #Preview {
     MainView()
 }
