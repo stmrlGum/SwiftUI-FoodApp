@@ -7,8 +7,14 @@
 
 import SwiftUI
 
+enum BookingItemStyle {
+    case booking
+    case history
+}
+
 struct BookingItem: View {
     let item: BookingItemModel
+    let style: BookingItemStyle
     var onPress: () -> ()
     
     var body: some View {
@@ -28,7 +34,7 @@ struct BookingItem: View {
                         .padding(.leading, 4)
                         .frame(width: 117, alignment: .leading)
                     GeneralButton(
-                        text: "Book",
+                        text: style == .booking ? "Book" : "Check",
                         style: .greenState, height: 28) {
                             onPress()
                         }
@@ -43,6 +49,7 @@ struct BookingItem: View {
         .padding(12)
         .background(Color.white)
         .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.06), radius: 4, x: 0, y: 1)
     }
 }
 
@@ -55,7 +62,7 @@ struct BookingItem: View {
             BookingItemModel(image: "rest2", restaurant: "Tava Restaurant", place: "Zakir Hossain Rd,\nChittagong"),
             BookingItemModel(image: "rest3", restaurant: "Haatkhola", place: "6 Surson Road,\nChittagong")
         ]
-        BookingItem(item: bookingItems[2]) {
+        BookingItem(item: bookingItems[2], style: .history) {
             print("tap")
         }
         .background(

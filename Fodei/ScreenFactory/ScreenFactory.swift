@@ -45,4 +45,9 @@ struct ScreenFactory {
         let vm = MapViewModel(routeCoordinates: routeCoordinates)
         return MapView(viewModel: vm)
     }
+    
+    static func makeBooking() -> BookingView {
+        let vm = BookingViewModel()
+        return BookingView(viewModel: vm)
+    }
 }

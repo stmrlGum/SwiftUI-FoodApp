@@ -44,6 +44,7 @@ struct MiddleCaruselItem: View {
         }
         .cornerRadius(16)
         .frame(width: 148, height: 196)
+        .shadow(color: Color.black.opacity(0.06), radius: 4, x: 0, y: 1)
         .onTapGesture {
             onPress()
         }
