@@ -6,40 +6,57 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct HomeView: View {
     
     @State var viewModel: HomeViewModel
     
     var body: some View {
-        VStack(spacing: 0) {
-            headerView
-                .padding(.bottom, 16)
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 0) {
-                    SearchBarView(text: $viewModel.searchText)
-                        .padding(.horizontal, 48)
-                    topСarouselView
-                        .padding(.top, 28)
-                    PageCounterView(page: Binding(
-                        get: { viewModel.currentPage ?? 0 },
-                        set: { viewModel.currentPage = $0 }
-                    ), totalPage: viewModel.topСarouselItems.count)
-                    middleSectionView
-                        .padding(.horizontal, 17)
-                        .padding(.top, 36)
-                    middleСarouselView
-                        .padding(.top, 16)
-                    bottomSectionView
-                        .padding(.horizontal, 17)
-                        .padding(.top, 36)
-                    bookingItems
-                        .padding(.top, 16)
-                        .padding(.bottom, 26)
+        NavigationStack {
+            VStack(spacing: 0) {
+                headerView
+                    .padding(.bottom, 16)
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 0) {
+                        SearchBarView(text: $viewModel.searchText, style: .gray)
+                            .padding(.horizontal, 48)
+                        topСarouselView
+                            .padding(.top, 28)
+                        PageCounterView(page: Binding(
+                            get: { viewModel.currentPage ?? 0 },
+                            set: { viewModel.currentPage = $0 }
+                        ), totalPage: viewModel.topСarouselItems.count)
+                        middleSectionView
+                            .padding(.horizontal, 17)
+                            .padding(.top, 36)
+                        middleСarouselView
+                            .padding(.top, 16)
+                        bottomSectionView
+                            .padding(.horizontal, 17)
+                            .padding(.top, 36)
+                        bookingItems
+                            .padding(.top, 16)
+                            .padding(.bottom, 26)
+                    }
+                }
+            }
+            .background(Color(#colorLiteral(red: 0.9719485641, green: 0.9719484448, blue: 0.9719485641, alpha: 1)))
+            .navigationDestination(isPresented: $viewModel.isShowMap) {
+                if let coord = viewModel.selectedCoordinate {
+                    ScreenFactory.makeMap(routeCoordinates: coord)
+                        .onDisappear {
+                            viewModel.isShowMap = false
+                        }
+                        .toolbar(.hidden, for: .navigationBar)
                 }
             }
         }
-        .background(Color(#colorLiteral(red: 0.9719485641, green: 0.9719484448, blue: 0.9719485641, alpha: 1)))
+    }
+    
+    private func openMap(position: CLLocationCoordinate2D) {
+        viewModel.selectedCoordinate = position
+        viewModel.isShowMap = true
     }
 }
 
@@ -70,7 +87,7 @@ private extension HomeView {
             HStack(spacing: 11) {
                 ForEach(Array(viewModel.topСarouselItems.enumerated()), id: \.element.id) { index, item in
                     TopCaruselItem(item: item) {
-                        print("pressed \(item.title)")
+                        openMap(position: item.position)
                     } .id(index)
                 }
             }
@@ -97,7 +114,7 @@ private extension HomeView {
             HStack(spacing: 12) {
                 ForEach(Array(viewModel.middleСarouselItems.enumerated()), id: \.element.id) { _ , item in
                     MiddleCaruselItem(item: item) {
-                        print("Pressed \(item.eat)")
+                        openMap(position: item.position)
                     }
                 }
             }

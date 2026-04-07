@@ -7,8 +7,15 @@
 
 import SwiftUI
 
+enum SearchBarStyle {
+    case gray
+    case white
+}
+
 struct SearchBarView: View {
     @Binding var text: String
+    var style: SearchBarStyle
+    
     var body: some View {
         HStack {
             Image("glass")
@@ -16,15 +23,31 @@ struct SearchBarView: View {
             TextField("Search...", text: $text)
                 .textFieldStyle(.plain)
                 .font(.interRegular(size: 12))
-                .foregroundStyle(Color(#colorLiteral(red: 0.6742052436, green: 0.7001355886, blue: 0.7406399846, alpha: 1)))
+                .foregroundStyle(textColor)
         }
         .frame(height: 36)
-        .background(Color(#colorLiteral(red: 0.9213625789, green: 0.9247634411, blue: 0.9309970737, alpha: 1)))
+        .background(backgroundColor)
         .cornerRadius(11)
     }
 }
 
+extension SearchBarView {
+    private var backgroundColor: Color {
+        switch style {
+        case .gray: return Color(#colorLiteral(red: 0.9019607843, green: 0.9058823529, blue: 0.9137254902, alpha: 1))
+        case .white: return Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
+        }
+    }
+
+    private var textColor: Color {
+        switch style {
+        case .gray: return Color(#colorLiteral(red: 0.6117647059, green: 0.6392156863, blue: 0.6862745098, alpha: 1))
+        case .white: return Color(#colorLiteral(red: 0.6117647059, green: 0.6392156863, blue: 0.6862745098, alpha: 1))
+        }
+    }
+}
+
 #Preview {
-    SearchBarView(text: .constant("Search"))
+    SearchBarView(text: .constant("Search"), style: .gray)
         .padding(.horizontal, 48)
 }

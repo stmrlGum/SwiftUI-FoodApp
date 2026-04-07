@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct TopCaruselItem: View {
     
@@ -46,7 +47,7 @@ struct TopCaruselItem: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    TopCaruselItem(item: TopСarousel(image: "burgers", title: "Flash Offer", subtitle: "We are here with the best\ndeserts intown.")) {
+    TopCaruselItem(item: TopСarousel(image: "burgers", title: "Flash Offer", subtitle: "We are here with the best\ndeserts intown.", position: CLLocationCoordinate2D(latitude: 43.1155, longitude: 131.8855))) {
         print("tapped")
     }
         .frame(height: 120)

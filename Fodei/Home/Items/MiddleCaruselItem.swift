@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct MiddleCaruselItem: View {
     
@@ -43,15 +44,38 @@ struct MiddleCaruselItem: View {
         }
         .cornerRadius(16)
         .frame(width: 148, height: 196)
+        .onTapGesture {
+            onPress()
+        }
     }
 }
 
 #Preview {
     let middleСarouselItems: [MiddleCarousel] = [
-        MiddleCarousel(image: "chickenBiryani", eat: "Chicken Biryani", place: "Ambrosia Hotel & Restaurant"),
-        MiddleCarousel(image: "sauceTonkatsu", eat: "Sauce Tonkatsu ", place: "Handi Restaurant, Chittagong"),
-        MiddleCarousel(image: "chickenKatsu", eat: "Chicken Katsu", place: "Ambrosia Hotel & Restaurant"),
-        MiddleCarousel(image: "dumpling", eat: "Dumpling", place: "Ambrosia Hotel & Restaurant")
+        MiddleCarousel(
+            image: "chickenBiryani",
+            eat: "Chicken Biryani",
+            place: "Ambrosia Hotel & Restaurant",
+            position: CLLocationCoordinate2D(latitude: 43.1180, longitude: 131.8820)
+        ),
+        MiddleCarousel(
+            image: "sauceTonkatsu",
+            eat: "Sauce Tonkatsu",
+            place: "Handi Restaurant, Chittagong",
+            position: CLLocationCoordinate2D(latitude: 43.1123, longitude: 131.8958)
+        ),
+        MiddleCarousel(
+            image: "chickenKatsu",
+            eat: "Chicken Katsu",
+            place: "Ambrosia Hotel & Restaurant",
+            position: CLLocationCoordinate2D(latitude: 43.1215, longitude: 131.8702)
+        ),
+        MiddleCarousel(
+            image: "dumpling",
+            eat: "Dumpling",
+            place: "Ambrosia Hotel & Restaurant",
+            position: CLLocationCoordinate2D(latitude: 43.1072, longitude: 131.8899)
+        )
     ]
     ZStack {
         Color(#colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1))
