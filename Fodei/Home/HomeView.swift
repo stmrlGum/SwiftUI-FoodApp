@@ -138,7 +138,7 @@ private extension HomeView {
     var bookingItems: some View {
         VStack(spacing: 6) {
             ForEach(Array(viewModel.bookingItems.enumerated()), id: \.element.id) { _ , item in
-                BookingItem(item: item) {
+                BookingItem(item: item, style: .booking) {
                     print(item.restaurant)
                 }
             }

@@ -19,7 +19,7 @@ struct MainView: View {
             TabView(selection: $selectedTab) {
                 ScreenFactory.makeHomeView()
                     .tag(TabBarEnums.home)
-                Color.green
+                ScreenFactory.makeBooking()
                     .tag(TabBarEnums.booking)
                 Color.cyan
                     .tag(TabBarEnums.profile)
