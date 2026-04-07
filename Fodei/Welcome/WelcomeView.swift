@@ -10,7 +10,7 @@ import SwiftUI
 struct WelcomeView: View {
     
     @Binding var path: NavigationPath
-    @StateObject var viewModel: WelcomeViewModel
+    @State var viewModel: WelcomeViewModel
     
     var body: some View {
         VStack(spacing: 0) {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RegistrationView: View {
     
-    @StateObject var viewModel: RegistrationViewModel
+    @State var viewModel: RegistrationViewModel
     @Environment(\.dismiss) private var dismiss
     @Namespace private var animationNamespace
     var onDismiss: () -> Void
