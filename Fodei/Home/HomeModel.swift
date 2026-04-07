@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct TopСarousel: Identifiable {
     let id = UUID()
     let image: String
     let title: String
     let subtitle: String
+    let position: CLLocationCoordinate2D
 }
 
 struct MiddleCarousel: Identifiable {
@@ -19,7 +21,7 @@ struct MiddleCarousel: Identifiable {
     let image: String
     let eat: String
     let place: String
-    // let coord
+    let position: CLLocationCoordinate2D
 }
 
 struct BookingItemModel: Identifiable {

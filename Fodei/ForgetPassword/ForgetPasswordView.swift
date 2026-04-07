@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ForgetPasswordView: View {
     
-    @StateObject var viewModel: ForgetPasswordViewModel
+    @State var viewModel: ForgetPasswordViewModel
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {

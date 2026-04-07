@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ScreenFactory {
     static func makeOnBoarding(path: Binding<NavigationPath>) -> OnBoardingView {
@@ -38,5 +39,10 @@ struct ScreenFactory {
     static func makeHomeView() -> HomeView {
         let vm = HomeViewModel()
         return HomeView(viewModel: vm)
+    }
+    
+    static func makeMap(routeCoordinates: CLLocationCoordinate2D) -> MapView {
+        let vm = MapViewModel(routeCoordinates: routeCoordinates)
+        return MapView(viewModel: vm)
     }
 }

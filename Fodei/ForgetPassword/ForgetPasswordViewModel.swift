@@ -8,10 +8,10 @@
 import Foundation
 import Combine
 
-final class ForgetPasswordViewModel: ObservableObject {
+@Observable final class ForgetPasswordViewModel {
     
-    @Published var email = ""
-    @Published var showNext = false
+    var email = ""
+    var showNext = false
     
     var isEmailValid: Bool {
         !email.isEmpty

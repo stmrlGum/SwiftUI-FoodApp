@@ -10,7 +10,7 @@ import SwiftUI
 struct OnBoardingView: View {
     
     @Binding var path: NavigationPath
-    @StateObject var viewModel: OnBoardingViewModel
+    @State var viewModel: OnBoardingViewModel
     
     var body: some View {
         VStack(spacing: 0) {

@@ -8,9 +8,9 @@
 import SwiftUI
 import Combine
 
-final class OnBoardingViewModel: ObservableObject {
+@Observable final class OnBoardingViewModel {
     
-    @Published var page: Int = 0
+    var page: Int = 0
     var onNext: (() -> Void)?
     
     let items: [OnBoardingModel] = [

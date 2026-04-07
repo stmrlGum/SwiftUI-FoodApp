@@ -8,22 +8,22 @@
 import SwiftUI
 import Combine
 
-final class RegistrationViewModel: ObservableObject {
+@Observable final class RegistrationViewModel {
     
-    @Published var createAccountModel = CreateAccountModel(
+    var createAccountModel = CreateAccountModel(
         fullName: "",
         username: "",
         password: ""
     )
     
-    @Published var loginModel = LoginModel(
+    var loginModel = LoginModel(
         username: "",
         password: ""
     )
     
-    @Published var selected: Int
-    @Published var showSheet: Bool = true
-    @Published var isForgotPresented: Bool = false
+    var selected: Int
+    var showSheet: Bool = true
+    var isForgotPresented: Bool = false
     var onMain: (() -> Void)?
     
     init(selected: Int) {

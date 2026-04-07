@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "backButtonBlack.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
