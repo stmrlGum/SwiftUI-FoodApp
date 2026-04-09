@@ -17,10 +17,10 @@ struct GeneralButton: View {
     var text: String
     var style: GeneralButtonState
     var height: CGFloat = 49
-    var onPress: (() -> ())?
+    var onPress: () -> ()
     var body: some View {
         Button {
-            onPress?()
+            onPress()
         } label: {
             Text(text)
                 .font(.interBold(size: 14))
@@ -55,5 +55,7 @@ extension GeneralButton {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    GeneralButton(text: "Create Account", style: .inActive)
+    GeneralButton(text: "Create Account", style: .inActive, onPress: {
+        print("pressed")
+    })
 }
