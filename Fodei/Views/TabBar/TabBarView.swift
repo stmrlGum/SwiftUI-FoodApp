@@ -43,7 +43,6 @@ struct TabBarView: View {
         .frame(height: 64)
         .fixedSize(horizontal: false, vertical: true)
         .ignoresSafeArea(edges: .bottom)
-        
     }
 }
 

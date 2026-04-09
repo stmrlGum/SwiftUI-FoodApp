@@ -20,7 +20,9 @@ struct BookingItem: View {
     var body: some View {
         HStack(spacing: 0) {
             Image(item.image)
+                .resizable()
                 .cornerRadius(8)
+                .frame(width: 64, height: 64)
             VStack(alignment: .leading, spacing: 0) {
                 Text(item.restaurant)
                     .font(.interSemiBold(size: 16))

@@ -50,4 +50,10 @@ struct ScreenFactory {
         let vm = BookingViewModel()
         return BookingView(viewModel: vm)
     }
+    
+    static func makeBookingDetail(bookingItem: BookingItemModel) -> BookingDetailView {
+        print("opened \(bookingItem)")
+        let vm = BookingDetailViewModel(bookingItem: bookingItem)
+        return BookingDetailView(viewModel: vm)
+    }
 }
