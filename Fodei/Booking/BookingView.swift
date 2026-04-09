@@ -10,6 +10,7 @@ import SwiftUI
 struct BookingView: View {
     
     @State var viewModel: BookingViewModel
+    var onDetailOpen: (BookingItemModel) -> Void
     
     var body: some View {
         NavigationStack {
@@ -24,16 +25,6 @@ struct BookingView: View {
                     .padding(.top, 24)
                 }
                 Spacer()
-            }
-            .navigationDestination(isPresented: $viewModel.isShowBookingDetail) {
-                if let item = viewModel.bookingItem {
-                    ScreenFactory.makeBookingDetail(bookingItem: item)
-                        .onDisappear {
-                            viewModel.isShowBookingDetail = false
-                        }
-                        .toolbar(.hidden, for: .navigationBar)
-                    
-                }
             }
         }
     }
@@ -75,7 +66,7 @@ private extension BookingView {
         VStack(spacing: 6) {
             ForEach(Array(viewModel.bookingItems.enumerated()), id: \.element.id) { _ , item in
                 BookingItem(item: item, style: .history) {
-                    openBookingDetail(bookingItem: item)
+                    onDetailOpen(item)
                 }
                 
             }
@@ -108,5 +99,7 @@ private extension BookingView {
 }
 
 #Preview {
-    ScreenFactory.makeBooking()
+    ScreenFactory.makeBooking { _ in
+        print("kek")
+    }
 }

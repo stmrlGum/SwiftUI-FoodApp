@@ -33,7 +33,8 @@ struct ScreenFactory {
     }
     
     static func makeMain() -> MainView {
-        return MainView()
+        let vm = MainViewModel()
+        return MainView(viewModel: vm)
     }
     
     static func makeHomeView() -> HomeView {
@@ -46,13 +47,14 @@ struct ScreenFactory {
         return MapView(viewModel: vm)
     }
     
-    static func makeBooking() -> BookingView {
+    static func makeBooking(onDetailOpen: @escaping (BookingItemModel) -> Void) -> BookingView {
         let vm = BookingViewModel()
-        return BookingView(viewModel: vm)
+        return BookingView(viewModel: vm,
+                           onDetailOpen: onDetailOpen
+        )
     }
     
     static func makeBookingDetail(bookingItem: BookingItemModel) -> BookingDetailView {
-        print("opened \(bookingItem)")
         let vm = BookingDetailViewModel(bookingItem: bookingItem)
         return BookingDetailView(viewModel: vm)
     }

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-@Observable class BookingViewModel {
+@Observable final class BookingViewModel {
     
     let bookingItems: [BookingItemModel] = [
         BookingItemModel(image: "rest1", restaurant: "Ambrosia Hotel & Restaurant", place: "kazi Deiry, Taiger Pass Chittagong"),
