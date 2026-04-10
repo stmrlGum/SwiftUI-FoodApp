@@ -8,27 +8,44 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @State var viewModel: MainViewModel
     @State private var selectedTab: TabBarEnums = .home
     
-    init() {
+    init(viewModel: MainViewModel) {
         UITabBar.appearance().isHidden = true
+        _viewModel = State(initialValue: viewModel)
     }
     
     var body: some View {
-        VStack(spacing: -10) {
-            TabView(selection: $selectedTab) {
-                ScreenFactory.makeHomeView()
-                    .tag(TabBarEnums.home)
-                ScreenFactory.makeBooking()
+        NavigationStack {
+            VStack(spacing: -10) {
+                TabView(selection: $selectedTab) {
+                    ScreenFactory.makeHomeView()
+                        .tag(TabBarEnums.home)
+                    ScreenFactory.makeBooking { item in
+                        viewModel.bookingItem = item
+                        viewModel.isShowBookingDetail = true
+                    }
                     .tag(TabBarEnums.booking)
-                Color.cyan
-                    .tag(TabBarEnums.profile)
+                    ScreenFactory.makeProfile()
+                        .tag(TabBarEnums.profile)
+                }
+                TabBarView(selectedTab: $selectedTab)
             }
-            TabBarView(selectedTab: $selectedTab)
+            .navigationDestination(isPresented: $viewModel.isShowBookingDetail) {
+                if let item = viewModel.bookingItem {
+                    ScreenFactory.makeBookingDetail(bookingItem: item)
+                        .onDisappear {
+                            viewModel.isShowBookingDetail = false
+                        }
+                        .toolbar(.hidden, for: .navigationBar)
+                }
+            }
         }
     }
 }
 
 #Preview {
-    MainView()
+    ScreenFactory.makeMain()
 }
