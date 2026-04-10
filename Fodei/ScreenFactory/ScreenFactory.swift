@@ -58,4 +58,9 @@ struct ScreenFactory {
         let vm = BookingDetailViewModel(bookingItem: bookingItem)
         return BookingDetailView(viewModel: vm)
     }
+    
+    static func makeProfile() -> ProfileView {
+        let vm = ProfileViewModel()
+        return ProfileView(viewModel: vm)
+    }
 }

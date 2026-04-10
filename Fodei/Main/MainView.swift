@@ -28,7 +28,7 @@ struct MainView: View {
                         viewModel.isShowBookingDetail = true
                     }
                     .tag(TabBarEnums.booking)
-                    Color.cyan
+                    ScreenFactory.makeProfile()
                         .tag(TabBarEnums.profile)
                 }
                 TabBarView(selectedTab: $selectedTab)
