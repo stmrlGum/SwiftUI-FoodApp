@@ -9,15 +9,21 @@ import SwiftUI
 
 @main
 struct FodeiApp: App {
-    @AppStorage("isShowOnBoarding") var isShowOnBoarding: Bool = false
     @State private var path = NavigationPath()
+    @AppStorage("isShowOnBoarding") private var isShowOnBoarding: Bool = false
+    @AppStorage("isRegistered") private var isRegistered: Bool = false
     
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $path) {
                 Group {
                     if isShowOnBoarding {
-                        ScreenFactory.makeMain()
+                        if isRegistered {
+                            ScreenFactory.makeMain()
+                        } else {
+                            ScreenFactory.makeWelcome(path: $path)
+                        }
+                        
                     } else {
                         ScreenFactory.makeOnBoarding(path: $path)
                     }

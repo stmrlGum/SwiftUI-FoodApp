@@ -52,8 +52,20 @@ private extension ProfileView {
             Button {
                 // go to notification
             } label: {
-                Image("notification")
-                    .padding(.trailing, 0)
+                ZStack(alignment: .topTrailing) {
+                    Image("notification")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                    Circle()
+                        .fill(.red)
+                        .frame(width: 12, height: 12)
+                        .offset(x: 0, y: 0)
+                        .overlay {
+                            Text("3")
+                                .font(.interMedium(size: 8))
+                                .foregroundStyle(Color.white)
+                        }
+                }
             }
             
             

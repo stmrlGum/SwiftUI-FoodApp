@@ -55,7 +55,7 @@ struct WelcomeView: View {
         .navigationBarBackButtonHidden()
         .fullScreenCover(isPresented: $viewModel.showScreen) {
             ScreenFactory.makeRegistration(selected: viewModel.selectedTab) {
-                path.append(OnBoardingRoute.main)
+                path = NavigationPath()
             }
             .presentationBackground(.clear)
         }
