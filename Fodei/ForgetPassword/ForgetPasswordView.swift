@@ -14,7 +14,12 @@ struct ForgetPasswordView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
+                Button {
+                 dismiss()
+                } label: {
+                    Image("backButtonBlack")
+                }
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Forget Password")
                         .font(.interBold(size: 20))
@@ -25,7 +30,7 @@ struct ForgetPasswordView: View {
                         .foregroundStyle(Color(#colorLiteral(red: 0.6742052436, green: 0.7001355886, blue: 0.7406399846, alpha: 1)))
                     
                 }
-                .padding(.top, 117)
+                .padding(.top, 89)
                 VStack(alignment: .leading, spacing: 16) {
                     GeneralLabel(
                         label: "Email address",
