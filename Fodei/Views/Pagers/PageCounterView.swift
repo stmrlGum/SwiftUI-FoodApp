@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PageCounterView: View {
-    @Binding var page: Int
+    @Binding var page: Int?
     var totalPage: Int
 
     var body: some View {

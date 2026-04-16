@@ -23,13 +23,16 @@ struct MainView: View {
                 TabView(selection: $selectedTab) {
                     ScreenFactory.makeHomeView()
                         .tag(TabBarEnums.home)
+                        .toolbar(.hidden, for: .navigationBar)
                     ScreenFactory.makeBooking { item in
                         viewModel.bookingItem = item
                         viewModel.isShowBookingDetail = true
                     }
                     .tag(TabBarEnums.booking)
+                    .toolbar(.hidden, for: .navigationBar)
                     ScreenFactory.makeProfile()
                         .tag(TabBarEnums.profile)
+                        .toolbar(.hidden, for: .navigationBar)
                 }
                 TabBarView(selectedTab: $selectedTab)
             }

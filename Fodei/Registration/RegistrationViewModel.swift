@@ -9,6 +9,10 @@ import SwiftUI
 import Combine
 
 @Observable final class RegistrationViewModel {
+    private enum StorageKeys {
+        static let isShowOnBoarding = "isShowOnBoarding"
+        static let isRegistered = "isRegistered"
+    }
     
     var createAccountModel = CreateAccountModel(
         fullName: "",
@@ -22,7 +26,7 @@ import Combine
     )
     
     var selected: Int
-    var showSheet: Bool = true
+    var showSheet: Bool = false
     var isForgotPresented: Bool = false
     var onMain: (() -> Void)?
     
@@ -43,11 +47,15 @@ import Combine
     
     func register() {
         print("register:", createAccountModel.fullName, createAccountModel.username, createAccountModel.password)
+        UserDefaults.standard.set(true, forKey: StorageKeys.isShowOnBoarding)
+        UserDefaults.standard.set(true, forKey: StorageKeys.isRegistered)
         onMain?()
     }
     
     func login() {
         print("login:", loginModel.username, loginModel.password)
+        UserDefaults.standard.set(true, forKey: StorageKeys.isShowOnBoarding)
+        UserDefaults.standard.set(true, forKey: StorageKeys.isRegistered)
         onMain?()
     }
     

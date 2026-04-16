@@ -23,10 +23,6 @@ struct HomeView: View {
                             .padding(.horizontal, 48)
                         topСarouselView
                             .padding(.top, 28)
-                        PageCounterView(page: Binding(
-                            get: { viewModel.currentPage ?? 0 },
-                            set: { viewModel.currentPage = $0 }
-                        ), totalPage: viewModel.topСarouselItems.count)
                         middleSectionView
                             .padding(.horizontal, 17)
                             .padding(.top, 36)
@@ -83,22 +79,25 @@ private extension HomeView {
 
 private extension HomeView {
     var topСarouselView: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 11) {
-                ForEach(Array(viewModel.topСarouselItems.enumerated()), id: \.element.id) { index, item in
-                    TopCaruselItem(item: item) {
-                        openMap(position: item.position)
-                    } .id(index)
+        VStack(alignment: .center, spacing: 0) {
+            ScrollView(.horizontal) {
+                HStack(spacing: 11) {
+                    ForEach(Array(viewModel.topСarouselItems.enumerated()), id: \.element.id) { index, item in
+                        TopCaruselItem(item: item) {
+                            openMap(position: item.position)
+                        } .id(index)
+                    }
                 }
+                .frame(height: 120)
+                .padding(.leading, 40)
+                .padding(.trailing, 40)
+                .scrollTargetLayout()
             }
-            .frame(height: 120)
-            .padding(.leading, 40)
-            .padding(.trailing, 40)
-            .scrollTargetLayout()
+            .scrollTargetBehavior(.viewAligned)
+            .scrollPosition(id: $viewModel.currentPage)
+            .scrollIndicators(.hidden)
+            PageCounterView(page: $viewModel.currentPage, totalPage: viewModel.topСarouselItems.count)
         }
-        .scrollTargetBehavior(.viewAligned)
-        .scrollPosition(id: $viewModel.currentPage)
-        .scrollIndicators(.hidden)
     }
 }
 
@@ -112,7 +111,7 @@ private extension HomeView {
     var middleСarouselView: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
-                ForEach(Array(viewModel.middleСarouselItems.enumerated()), id: \.element.id) { _ , item in
+                ForEach(viewModel.middleСarouselItems) { item in
                     MiddleCaruselItem(item: item) {
                         openMap(position: item.position)
                     }
@@ -137,7 +136,7 @@ private extension HomeView {
     
     var bookingItems: some View {
         VStack(spacing: 6) {
-            ForEach(Array(viewModel.bookingItems.enumerated()), id: \.element.id) { _ , item in
+            ForEach(viewModel.bookingItems) { item in
                 BookingItem(item: item, style: .booking) {
                     print(item.restaurant)
                 }
