@@ -10,7 +10,7 @@ import Combine
 
 @Observable final class OnBoardingViewModel {
     
-    var page: Int = 0
+    var page: Int? = 0
     var onNext: (() -> Void)?
     
     let items: [OnBoardingModel] = [
@@ -39,8 +39,9 @@ import Combine
     }
     
     func nextPage() {
+        guard let page else { return }
         if page < items.count - 1 {
-            page += 1
+            self.page = page + 1
         } else {
             finishOnboarding()
         }

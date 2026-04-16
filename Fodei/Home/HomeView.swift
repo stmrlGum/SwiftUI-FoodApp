@@ -96,10 +96,7 @@ private extension HomeView {
             .scrollTargetBehavior(.viewAligned)
             .scrollPosition(id: $viewModel.currentPage)
             .scrollIndicators(.hidden)
-            PageCounterView(page: Binding(
-                get: { viewModel.currentPage ?? 0 },
-                set: { viewModel.currentPage = $0 }
-            ), totalPage: viewModel.topСarouselItems.count)
+            PageCounterView(page: $viewModel.currentPage, totalPage: viewModel.topСarouselItems.count)
         }
     }
 }
