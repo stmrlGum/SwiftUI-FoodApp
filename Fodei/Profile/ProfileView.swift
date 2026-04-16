@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     
     @State var viewModel: ProfileViewModel
+    @AppStorage("isShowOnBoarding") private var isShowOnBoarding: Bool = false
+    @AppStorage("isRegistered") private var isRegistered: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -120,7 +122,8 @@ private extension ProfileView {
 private extension ProfileView {
     var logOutButton: some View {
         Button {
-            print("logOuted")
+            isShowOnBoarding = true
+            isRegistered = false
         } label: {
             Text("Logout")
                 .font(.interSemiBold(size: 16))
@@ -157,6 +160,5 @@ struct AppSettingsItem: View {
 }
 
 #Preview {
-    //ProfileView()
     ScreenFactory.makeProfile()
 }

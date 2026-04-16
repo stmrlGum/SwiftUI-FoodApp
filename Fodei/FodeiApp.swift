@@ -36,6 +36,9 @@ struct FodeiApp: App {
                         ScreenFactory.makeMain()
                     }
                 }
+                .onChange(of: isRegistered) { _, _ in
+                    path.append(OnBoardingRoute.welcome)
+                }
             }
         }
     }
